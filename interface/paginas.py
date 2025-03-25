@@ -2,15 +2,19 @@ import flet as ft
 from servicos.criacao import CriadorFormulario
 
 
-class GerenciadorFormulario:
+class GerenciadorPaginas:
     def __init__(self, page: ft.Page):
         """
         Inicializa o gerenciador do app.
         :param page: Referência à pagina do flet (obrogatório para atualizar a UI)
         """
         self.page = page
-        self.CriadorFormulario(page) #Armazena os dados do formulário sendo criado
-        self._pagina_inicial() # Renderiza a primeira página auto
+        
+        logica_telas = 1
+        if logica_telas == 0:
+            self._pagina_inicial() # Renderiza a primeira página.
+        else:
+            self._pagina_formulario() # Renderiza a página de formulário
 
     def _pagina_inicial(self):
         # ------------------------------------------------------------
@@ -34,8 +38,10 @@ class GerenciadorFormulario:
 
         botao = ft.ElevatedButton(
             text="Novo Formulário",
-            on_click=CriadorFormulario, # chama o Método 2   
+            on_click=lambda e : print('Chama um classe que gera uma tabela'), # chama o Método 2   
         )
+
+        
 
         self.page.clean()
         # Organiza os elementos na página
@@ -54,3 +60,8 @@ class GerenciadorFormulario:
         self.page.update()
     
 
+    def _pagina_formulario(self):
+        CriadorFormulario(self.page).renderizar_formulario_existente()
+
+        
+        
