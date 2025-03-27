@@ -1,5 +1,5 @@
 import flet as ft
-from servicos.criacao import CriadorFormulario
+from servicos.criacao import GeradorFormulario
 
 
 class GerenciadorPaginas:
@@ -10,11 +10,11 @@ class GerenciadorPaginas:
         """
         self.page = page
         
-        logica_telas = 1
+        logica_telas = 0
         if logica_telas == 0:
             self._pagina_inicial() # Renderiza a primeira página.
         else:
-            self._pagina_formulario() # Renderiza a página de formulário
+            GeradorFormulario(self.page) # Renderiza a página de formulário
 
     def _pagina_inicial(self):
         # ------------------------------------------------------------
@@ -23,7 +23,8 @@ class GerenciadorPaginas:
         titulo = ft.Text(
             value="Bem-vindo ao gerador de Formulário",
             size=30,
-            weight=ft.FontWeight.BOLD,            
+            weight=ft.FontWeight.BOLD,
+            color=ft.Colors.WHITE,            
         )
 
         instrucoes = ft.Text(
@@ -33,12 +34,15 @@ class GerenciadorPaginas:
             "3. Salve e use seu formulário personalizado!"
             "você pode adicionar, alterar, limpar e excluir dados e o formulário",
             size=12,
-            color=ft.Colors.WHITE12,
+            color=ft.Colors.WHITE38,
         )
+
+        
 
         botao = ft.ElevatedButton(
             text="Novo Formulário",
-            on_click=lambda e : print('Chama um classe que gera uma tabela'), # chama o Método 2   
+            on_click=lambda e:GeradorFormulario(self.page), # chama o Método 2   
+            color=ft.Colors.BLACK38
         )
 
         
@@ -59,9 +63,6 @@ class GerenciadorPaginas:
         )
         self.page.update()
     
-
-    def _pagina_formulario(self):
-        CriadorFormulario(self.page).renderizar_formulario_existente()
 
         
         

@@ -1,110 +1,120 @@
 import flet as ft
 
-class CriadorFormulario:
-    """ Cria o formulário, definindo pelo usuário o nome e as campos """
-
-    def __init__(self, page:ft.Page):
+class GeradorFormulario:
+    def __init__(self, page: ft.Page):
+        """
+        Inicializa o gerador de formulários.
+        :param page: Referência à página do Flet
+        """
         self.page = page
         self.nome_formulario = ""
         self.campos = []
-        self._definir_inteface_criacao()
+        
 
-    def _definir_inteface_criacao(self):
-        """ Gera uma interface para serem definidas os nomes
-         do formulário e dos campos """
+        self.campo_nome_formulario = None
+        self.campo_novo_campo = None
+        self.lista_campos = None
+        self.botao_adicionar = None
+        self.botao_ok = None
+        self.botao_cancelar = None
 
-        self.page.clean()
-
-        # Elementos da UI
-
-        self.nome_formulario = ft.TextField(
+        self._inicializar_ui()
+        self._renderizar()
+    
+    def _inicializar_ui(self):
+        """Inicializa todos os componentes da interface do usuário"""
+       
+        # 1. Campo para nome do formulário
+        self.campo_nome_formulario = ft.TextField(
             label="Nome do formulário",
-            on_change=self._atualizar_nome_formulario
+            color=ft.Colors.WHITE38,
         )
-
-        self._lista_campos = ft.Column([])
-
-        botao_add = ft.IconButton(
-            icon=ft.Icons.ADD,
-            icon_size=30,
-            icon_color=ft.Colors.WHITE,
+        
+        # 2. Campo para novo campo + botão adicionar
+        self.campo_novo_campo = ft.TextField(
+            label="Novo Campo",
+            color=ft.Colors.WHITE38,
+        )
+        self.botao_adicionar = ft.ElevatedButton(
+            text="Adicionar Campo",
             on_click=self._adicionar_campo
         )
-
-        botao_finalizar = ft.ElevatedButton(
+        
+        # 3. Lista visual dos campos adicionados
+        self.lista_campos = ft.Column([])
+        
+        # 4. Botões de ação
+        self.botao_ok = ft.ElevatedButton(
             text="OK",
-            on_click=self._renderizar_formulario_final
+            color=ft.Colors.WHITE38,
+            on_click=self._finalizar_formulario
+        )
+        self.botao_cancelar = ft.ElevatedButton(
+            text="Cancelar",
+            on_click=self._voltar_pagina_inicial
         )
 
+    def _renderizar(self):
+        """ Renderiza todos os componentes na página """
+        self.page.clean()
         self.page.add(
-            ft.Column(
-                [
-                    self.nome_formulario,
-                    ft.Row([
-                        ft.Text("Campos do Formulário:"),
-                        botao_add
-                    ]),
-                    self._lista_campos,
-                    botao_finalizar, 
-                ]
-            )
+            ft.Column([
+                self.campo_nome_formulario,
+                ft.Row([
+                    self.campo_novo_campo, 
+                    self.botao_adicionar,
+                ],
+                alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
+                ft.Text(value="Campos do Formulário"),
+                self.lista_campos,
+                ft.Row([
+                    self.botao_ok,
+                    self.botao_cancelar
+                ],
+                alignment=ft.MainAxisAlignment.SPACE_AROUND)
+            ])
         )
-        
+        self.page.update()
+
+
     def _adicionar_campo(self, e):
-        """ Adiciona um novo campo á lista """
-        novo_campo = ft.TextField(
-            label=f"Campo {len(self.campos) + 1}",
-            hint_text="Digite o nome do novo campo",
-            on_change=lambda e, idx=len(self.campos): self._atualizar_campo(e, idx)
-        )
-        
-        self.campos.append(""), # Inicia com nome vazio
-        self._lista_campos.campos.controls.append(novo_campo)
-        self.page.update()
-
-    # Atualizar valores
-
-    def _atualizar_nome_formulario(self, e):
-        self.nome_formulario = e.control.value
-    def _atualizar_campo(self, e, index):
-        self.campos[index] = e.control.value
-
-
-    def _renderizar_formulario_final(self, e):
-        """Exibe o formulário pronto para preenchimento."""
-    
-        if not self.nome_formulario or not any(self.campos):
-            self.page.snack_bar = ft.SnackBar(ft.Text("Preencha todos os campos!"))
-            self.page.snack_bar.open = True
+        """Adiciona um novo campo à lista de campos"""
+        # 1. Validar entrada-
+        if not self.campo_novo_campo.value:
             return
-    
-    def renderizar_formulario_existente(self):
-        """Renderiza o formulário completo (MÉTODO QUE VOCÊ PERGUNTOU)"""
-        self.page.clean()
-        
-        # Cabeçalho
-        cabecalho = ft.Text(f"Formulário: {self.nome_formulario}", size=24)
-        
-        # Campos para preenchimento
-        campos_preenchimento = [
-            ft.TextField(label=nome_campo)
-            for nome_campo in self.campos if nome_campo
-        ]
-        
-        self.page.add(ft.Column([cabecalho, *campos_preenchimento]))
-        self.page.update()
-        
-        self.page.clean()
-        
-        # Cabeçalho
-        cabecalho = ft.Text(f"Formulário: {self.nome_formulario}", size=24)
-        
-        # Campos para preenchimento
-        campos_ui = []
-        for nome_campo in self.campos:
-            if nome_campo:  # Ignora campos vazios
-                campos_ui.append(ft.TextField(label=nome_campo))
-        
-        self.page.add(
-            ft.Column([cabecalho, *campos_ui])
+        # 2. Adicionar à lista self.campos
+        novo_campo = self.campo_novo_campo.value
+        self.campos.append(novo_campo)
+        # 3. Atualizar a visualização self.lista_campos
+        self.lista_campos.controls.append(
+            ft.Text(novo_campo, color=ft.Colors.WHITE)
         )
+        # 4. Limpar o campo de entrada
+        self.campo_novo_campo.value = ""
+
+        # Atualizar a página
+        self.page.update()
+        pass
+
+    def _finalizar_formulario(self, e):
+        """Finaliza a criação do formulário"""
+        # 1. Validar se tem nome e pelo menos um campo
+        if not self.campo_nome_formulario.value:
+            self.campo_nome_formulario.error_text = "Digite um nome para o formulário"
+            self.page.update()
+            return
+
+        if not self.campos:
+            self.campo_novo_campo.error_text = 'Adicione pelo menos um campo',
+            self.page.update()
+            return
+        # 2. Salvar os dados (nome_formulario e campos)
+        self.nome_formulario = self.campo_nome_formulario.value
+        print(f"Formulário '{self.nome_formulario}' campos {self.campos}")
+        # 3. Voltar à página inicial ou avançar para próxima tela
+        
+
+    def _voltar_pagina_inicial(self):
+        """ Volta a página inicial """
+        self.page.clean()
+        self.page.update()
