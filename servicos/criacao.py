@@ -36,8 +36,10 @@ class GeradorFormulario:
             label="Novo Campo",
             color=ft.Colors.WHITE38,
         )
-        self.botao_adicionar = ft.ElevatedButton(
-            text="Adicionar Campo",
+        self.botao_adicionar = ft.IconButton(
+            icon=ft.Icons.ADD,
+            icon_color=ft.Colors.WHITE,
+            icon_size=30,
             on_click=self._adicionar_campo
         )
         
@@ -47,16 +49,22 @@ class GeradorFormulario:
         # 4. Botões de ação
         self.botao_ok = ft.ElevatedButton(
             text="OK",
-            color=ft.Colors.WHITE38,
+            color=ft.Colors.WHITE,
+            bgcolor=ft.Colors.BLACK,
             on_click=self._finalizar_formulario
         )
         self.botao_cancelar = ft.ElevatedButton(
             text="Cancelar",
+            color=ft.Colors.WHITE,
+            bgcolor=ft.Colors.BLACK,
             on_click=self._voltar_pagina_inicial
         )
 
     def _renderizar(self):
         """ Renderiza todos os componentes na página """
+        self.page.exepand = True
+        self.page.vertical_alignment = ft.alignment.center
+        self.page.horizontal_alignment = ft.alignment.top_center
         self.page.clean()
         self.page.add(
             ft.Column([
@@ -65,7 +73,7 @@ class GeradorFormulario:
                     self.campo_novo_campo, 
                     self.botao_adicionar,
                 ],
-                alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
+                alignment=ft.MainAxisAlignment.SPACE_AROUND),
                 ft.Text(value="Campos do Formulário"),
                 self.lista_campos,
                 ft.Row([
@@ -73,7 +81,11 @@ class GeradorFormulario:
                     self.botao_cancelar
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_AROUND)
-            ])
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+            spacing=20,
+            run_spacing=20,
+            )
         )
         self.page.update()
 
@@ -109,12 +121,31 @@ class GeradorFormulario:
             self.campo_novo_campo.error_text = 'Adicione pelo menos um campo',
             self.page.update()
             return
-        # 2. Salvar os dados (nome_formulario e campos)
-        self.nome_formulario = self.campo_nome_formulario.value
-        print(f"Formulário '{self.nome_formulario}' campos {self.campos}")
-        # 3. Voltar à página inicial ou avançar para próxima tela
-        
 
+         # Salva no banco de dados
+        sucesso = self.db.salvar_formulario(
+            nome_formulario=self.campo_nome_formulario.value,
+            campos=self.campos
+        )
+        
+        if sucesso:
+            # Mostrar mensagem de sucesso
+            self.page.snack_bar = ft.SnackBar(
+                content=ft.Text("Formulário salvo com sucesso!"),
+                bgcolor=ft.colors.GREEN
+            )
+            self.page.snack_bar.open = True
+            self.page.update()
+        else:
+            # Mostrar mensagem de erro
+            self.page.snack_bar = ft.SnackBar(
+                content=ft.Text("Erro ao salvar formulário!"),
+                bgcolor=ft.colors.RED
+            )
+            self.page.snack_bar.open = True
+            self.page.update() 
+    
+    # 3. Voltar à página inicial ou avançar para próxima tela
     def _voltar_pagina_inicial(self, e=None):
         """ Volta a página inicial """
         self.page.clean()

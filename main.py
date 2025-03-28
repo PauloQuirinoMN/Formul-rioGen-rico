@@ -7,6 +7,11 @@ def main(page: ft.Page):
     page.vertical_alignment = "center"
     page.bgcolor = ft.Colors.BLACK12
     page.padding = ft.padding.all(20)
+
+
+
+    # O gerenciador de páginas recebe 
+    # a página e a instância do bando de dados
     GerenciadorPaginas(page) 
 
 
