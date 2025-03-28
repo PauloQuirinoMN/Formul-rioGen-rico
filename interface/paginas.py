@@ -41,11 +41,9 @@ class GerenciadorPaginas:
 
         botao = ft.ElevatedButton(
             text="Novo Formulário",
-            on_click=lambda e:GeradorFormulario(self.page), # chama o Método 2   
+            on_click=lambda e:self._mostrar_criacao_formulario(), # chama o Método 2   
             color=ft.Colors.BLACK38
         )
-
-        
 
         self.page.clean()
         # Organiza os elementos na página
@@ -64,5 +62,11 @@ class GerenciadorPaginas:
         self.page.update()
     
 
-        
+    def _mostrar_criacao_formulario(self):
+        """ Mostra a tela de criação de formulário """
+        self.page.clean()
+        GeradorFormulario(
+            page=self.page,
+            callback_voltar=self._pagina_inicial
+        )  
         

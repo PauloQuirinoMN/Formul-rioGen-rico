@@ -1,12 +1,13 @@
 import flet as ft
 
 class GeradorFormulario:
-    def __init__(self, page: ft.Page):
+    def __init__(self, page: ft.Page, callback_voltar:callable):
         """
         Inicializa o gerador de formulários.
         :param page: Referência à página do Flet
         """
         self.page = page
+        self.callback_voltar = callback_voltar
         self.nome_formulario = ""
         self.campos = []
         
@@ -114,7 +115,10 @@ class GeradorFormulario:
         # 3. Voltar à página inicial ou avançar para próxima tela
         
 
-    def _voltar_pagina_inicial(self):
+    def _voltar_pagina_inicial(self, e=None):
         """ Volta a página inicial """
         self.page.clean()
+        if self.callback_voltar:
+            self.callback_voltar()
+        
         self.page.update()
