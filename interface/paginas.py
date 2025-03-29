@@ -57,15 +57,5 @@ class GerenciadorPaginas:
         self.page.update()
     
     def _chama_formulario(self):
-        FormularioTransacao(
-            page=self.page,
-            descricao="", 
-            qtd=0, 
-            valor=0.0, 
-            tipo="", 
-            categoria="", 
-            percepcaopreco=0, 
-            felicidade=0, 
-            importancia=0
-        )
+        FormularioTransacao._formulario_ui(self)
             
