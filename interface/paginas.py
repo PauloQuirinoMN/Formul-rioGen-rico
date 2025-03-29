@@ -1,12 +1,12 @@
 import flet as ft
-from servicos.criacao import GeradorFormulario
+from formulario.transacao import FormularioTransacao
 
 class GerenciadorPaginas:
     def __init__(self, page: ft.Page):
         """
         Inicializa o gerenciador do app.
         :param page: Referência à pagina do flet (obrigatório para atualizar a UI)
-        :param db: Instância do banco de dados
+        
         """
         self.page = page
         self._pagina_inicial()
@@ -36,7 +36,7 @@ class GerenciadorPaginas:
 
         botao = ft.ElevatedButton(
             text="Novo Formulário",
-            on_click=lambda e:self._mostrar_criacao_formulario(), # chama o Método 2   
+            on_click=lambda e:self._chama_formulario(), # chama o Método 2   
             color=ft.Colors.BLACK38
         )
 
@@ -56,12 +56,16 @@ class GerenciadorPaginas:
         )
         self.page.update()
     
-
-    def _mostrar_criacao_formulario(self):
-        """ Mostra a tela de criação de formulário """
-        self.page.clean()
-        GeradorFormulario(
+    def _chama_formulario(self):
+        FormularioTransacao(
             page=self.page,
-            callback_voltar=self._pagina_inicial
-        )  
-        
+            descricao="", 
+            qtd=0, 
+            valor=0.0, 
+            tipo="", 
+            categoria="", 
+            percepcaopreco=0, 
+            felicidade=0, 
+            importancia=0
+        )
+            
