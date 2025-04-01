@@ -1,4 +1,5 @@
 import flet as ft
+from visualizacoes.display import Display
 
 class GerenciadorPaginas:
     def __init__(self, page: ft.Page):
@@ -16,28 +17,64 @@ class GerenciadorPaginas:
         # ------------------------------------------------------------
         # Método 1: Página Inicial (Tutorial + Botão criar formulário)
         # ------------------------------------------------------------
+
+
+
         titulo = ft.Text(
-            value="Bem-vindo ao gerador de Formulário",
-            size=30,
+            value="Bem-vindo ao Controle Financeiro",
+            size=25,
             weight=ft.FontWeight.BOLD,
             color=ft.Colors.WHITE,            
         )
 
         instrucoes = ft.Text(
             value="Como usar:\n"
-            "1. Clique em 'Novo Formulário' para começar\n"
-            "2. Defina o nome e os campos\n"
-            "3. Salve e use seu formulário personalizado!"
-            "você pode adicionar, alterar, limpar e excluir dados e o formulário",
+            "1. Clique em 'Nova transação' para começar\n"
+            "2. Preencha os campos\n"
+            "3. Salve o registro!\n"
+            "4. Veja um resumo dos seus registros!\n"
+            "5. Uma análise inicial de seus dados!\n"
+            "6. Exportar para seu dispositivo!\n"
+            "você pode adicionar, alterar, limpar e excluir dados do seu banco de dados!",
             size=12,
             color=ft.Colors.WHITE38,
         )
 
         botao = ft.ElevatedButton(
-            text="Novo Formulário",
+            text="Nova Transação",
             on_click=lambda e:self._chama_formulario(), # chama o Método 2   
             color=ft.Colors.BLACK38,
         )
+
+        rodape = ft.Container(
+            content=ft.Row(
+            controls=[
+                ft.IconButton(
+                content=ft.Image(
+                    src='001-instagram.png', height=15, color=ft.Colors.WHITE,     
+                ),
+                url='https://www.instagram.com/pauloqneto/',
+                ),
+                ft.IconButton(
+                    content=ft.Image(
+                        src='002-linkedin.png', height=15, color=ft.Colors.WHITE,   
+                    ),
+                    url='https://www.linkedin.com/feed/',
+                ),
+                ft.IconButton(
+                    content=ft.Image(
+                        src='003-github.png', height=15, color=ft.Colors.WHITE,
+                           
+                    ),
+                    url='https://github.com/PauloQuirinoMN',
+                ),
+            ],
+            alignment=ft.MainAxisAlignment.SPACE_AROUND,
+        ))
+
+
+        # instância do display
+        displayrs = Display(page=self.page)
 
         self.page.clean()
         # Organiza os elementos na página
@@ -47,7 +84,10 @@ class GerenciadorPaginas:
                 controls=[
                     titulo,
                     instrucoes,
-                    ft.Row([botao], alignment=ft.MainAxisAlignment.CENTER), 
+                    ft.Row([botao], alignment=ft.MainAxisAlignment.CENTER),
+                    ft.Row(controls=[]),
+                    displayrs.componente,
+                    rodape,
                 ],
                 alignment=ft.MainAxisAlignment.CENTER,
                 spacing=30,
