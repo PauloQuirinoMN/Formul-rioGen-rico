@@ -22,28 +22,34 @@ class GerenciadorPaginas:
 
         titulo = ft.Text(
             value="Bem-vindo ao Controle Financeiro",
-            size=25,
+            size=20,
             weight=ft.FontWeight.BOLD,
+            color=ft.Colors.WHITE,            
+        )
+
+        sub_titulo = ft.Text(
+            value=("O objetivo: ajudar organizar as despesas"),
+            size=10,
+            weight=ft.FontWeight.W_500,
             color=ft.Colors.WHITE,            
         )
 
         instrucoes = ft.Text(
             value="Como usar:\n"
-            "1. Clique em 'Nova transação' para começar\n"
-            "2. Preencha os campos\n"
-            "3. Salve o registro!\n"
-            "4. Veja um resumo dos seus registros!\n"
-            "5. Uma análise inicial de seus dados!\n"
-            "6. Exportar para seu dispositivo!\n"
-            "você pode adicionar, alterar, limpar e excluir dados do seu banco de dados!",
-            size=12,
+                "1. Clique em '+' para começar\n"
+                "2. Preencha os campos\n"
+                "3. Salve o registro!\n"
+                "4. Terá análise inicial de seus dados!\n",
+            size=10,
             color=ft.Colors.WHITE38,
         )
 
-        botao = ft.ElevatedButton(
-            text="Nova Transação",
+        botao = ft.IconButton(
+            icon=ft.Icons.ADD,
+            icon_size=40,
             on_click=lambda e:self._chama_formulario(), # chama o Método 2   
-            color=ft.Colors.BLACK38,
+            icon_color=ft.Colors.BLACK38,
+            bgcolor=ft.Colors.WHITE38
         )
 
         rodape = ft.Container(
@@ -83,14 +89,15 @@ class GerenciadorPaginas:
                 expand=True,
                 controls=[
                     titulo,
+                    sub_titulo,
                     instrucoes,
-                    ft.Row([botao], alignment=ft.MainAxisAlignment.CENTER),
+                    ft.Row([botao], alignment=ft.MainAxisAlignment.END),
                     ft.Row(controls=[]),
                     displayrs.componente,
                     rodape,
                 ],
                 alignment=ft.MainAxisAlignment.CENTER,
-                spacing=30,
+                spacing=5,
             )
         )
         self.page.update()
