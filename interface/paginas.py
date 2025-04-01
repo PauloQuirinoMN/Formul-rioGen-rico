@@ -1,6 +1,5 @@
 import flet as ft
 from visualizacoes.display import Display
-
 class GerenciadorPaginas:
     def __init__(self, page: ft.Page):
         """
@@ -17,8 +16,6 @@ class GerenciadorPaginas:
         # ------------------------------------------------------------
         # Método 1: Página Inicial (Tutorial + Botão criar formulário)
         # ------------------------------------------------------------
-
-
 
         titulo = ft.Text(
             value="Bem-vindo ao Controle Financeiro",
@@ -106,11 +103,13 @@ class GerenciadorPaginas:
     def _chama_formulario(self):
         self.page.clean()
 
-        self.comp_descricao = ft.TextField(
+
+
+        comp_descricao = ft.TextField(
             label="Descrição",
         )
 
-        self.comp_qt = ft.Container(
+        comp_qt = ft.Container(
             alignment=ft.alignment.center,
             expand=True,
             padding=0,
@@ -130,6 +129,28 @@ class GerenciadorPaginas:
             )
         )
 
+
+        comp_valor = ft.Container(
+            content=ft.Row([
+                ft.TextField(label=0.00, text_size=45, color=ft.Colors.WHITE),
+                ft.Text(value="R$", color=ft.Colors.WHITE, size=35)
+            ],
+            alignment=ft.MainAxisAlignment.SPACE_AROUND)
+        )
+        # comp_tipo = ft.Container(
+        #     content=ft.Row(
+        #         [
+        #             ft.IconButton(icon=ft.Icons.)
+        #         ],
+        #         alignment=ft.MainAxisAlignment.SPACE_AROUND)
+        # )
+        comp_categoria = ft.Container()
+        comp_perc_preço = ft.Container()
+        comp_necessidade = ft.Container()
+        comp_felicidade = ft.Container()
+        comp_data_hora = ft.Container()
+
+        
         # Botões
         botoes = ft.Row(
             controls=[
@@ -139,16 +160,19 @@ class GerenciadorPaginas:
             alignment=ft.MainAxisAlignment.END
         )
 
-        
 
         formulario = ft.Column(
-            controls=[  # Lista de controles diretamente aqui
+            controls=[ 
                 ft.Row(
-                    controls=[self.comp_descricao, self.comp_qt],
+                    controls=[
+                        comp_descricao, 
+                        comp_qt,
+                    ],
                     alignment=ft.MainAxisAlignment.SPACE_AROUND
                 ),
-                ft.Container(expand=True),  # Espaço vazio simplificado
-                botoes
+                comp_valor,
+
+                botoes,
             ],
             expand=True,
             spacing=20,
