@@ -53,15 +53,15 @@ class Display:
                         )
                     ),
                     ft.Tab(
-                        tab_content=ft.Image(src="ideia.jpg", border_radius=100),
+                        tab_content=ft.Image(src="infor.jpg", border_radius=100),
                         content=ft.Text("resumo", color=paleta["laranja_fraco"])
                     ),
                     ft.Tab(
-                        tab_content=ft.Image(src="ans.jpg", border_radius=100),
+                        tab_content=ft.Image(src="analisidade.jpg", border_radius=100),
                         content=ft.Text("análise dados", color=paleta["laranja_fraco"])
                     ),
                     ft.Tab(
-                        tab_content=ft.Image(src="anl.jpg", border_radius=100),
+                        tab_content=ft.Image(src="add1.jpg", border_radius=100),
                         content=ft.Text("powerbi", color=paleta["laranja_fraco"])
                     ),
                 ],
