@@ -14,7 +14,6 @@ class Display:
             expand=True,
             content=ft.Tabs(
                 expand=True,
-                scrollable=False,
                 indicator_tab_size=True,
                 indicator_padding=2,
                 label_color=ft.Colors.WHITE,

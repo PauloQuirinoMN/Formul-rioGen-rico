@@ -98,54 +98,17 @@ class GerenciadorPaginas:
     def _chama_formulario(self):
         self.page.clean()
 
-
-
         comp_descricao = ft.TextField(
             label="Descrição",
         )
-
-        comp_qt = ft.Container(
-            alignment=ft.alignment.center,
-            expand=True,
-            padding=0,
-            content=ft.Row(
-                controls=[
-                    ft.Text(value='1', size=20, color=ft.Colors.WHITE),
-                    ft.Column(
-                        controls=[
-                            ft.Icon(name=ft.Icons.EXPAND_LESS, size=30, color=ft.Colors.WHITE38),
-                            ft.Icon(name=ft.Icons.EXPAND_MORE, size=30, color=ft.Colors.WHITE38),
-                        ],
-                        alignment=ft.MainAxisAlignment.CENTER,
-                        spacing=0,
-                    )
-                ],
-                alignment=ft.alignment.center
-            )
-        )
-
-
-        comp_valor = ft.Container(
-            content=ft.Row([
-                ft.TextField(label=0.00, text_size=45, color=ft.Colors.WHITE),
-                ft.Text(value="R$", color=ft.Colors.WHITE, size=35)
-            ],
-            alignment=ft.MainAxisAlignment.SPACE_AROUND)
-        )
-        # comp_tipo = ft.Container(
-        #     content=ft.Row(
-        #         [
-        #             ft.IconButton(icon=ft.Icons.)
-        #         ],
-        #         alignment=ft.MainAxisAlignment.SPACE_AROUND)
-        # )
+        comp_qt = ft.Container()
+        comp_valor = ft.Container()
+        comp_tipo = ft.Container()
         comp_categoria = ft.Container()
         comp_perc_preço = ft.Container()
-        comp_necessidade = ft.Container()
+        comp_satisfacao = ft.Container()
         comp_felicidade = ft.Container()
-        comp_data_hora = ft.Container()
 
-        
         # Botões
         botoes = ft.Row(
             controls=[
@@ -156,21 +119,7 @@ class GerenciadorPaginas:
         )
 
 
-        formulario = ft.Column(
-            controls=[ 
-                ft.Row(
-                    controls=[
-                        comp_descricao, 
-                        comp_qt,
-                    ],
-                    alignment=ft.MainAxisAlignment.SPACE_AROUND
-                ),
-                comp_valor,
-                botoes,
-            ],
-            expand=True,
-            spacing=20,
-        )
+        formulario = ft.Container()
 
         self.page.add(formulario)  
 
