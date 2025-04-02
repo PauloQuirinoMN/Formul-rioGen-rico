@@ -2,6 +2,17 @@ import flet as ft
 from visualizacoes.display import Display
 
 
+
+paleta = {
+    "azul_escuro": "#000020",
+    "azul_medio": "#171a4a",
+    "azul_claro": "#2f2c79",
+    "laranja_forte": "#ff9800",
+    "laranja_fraco": "#ffcc50",
+}
+
+
+
 class GerenciadorPaginas:
     def __init__(self, page: ft.Page):
         """
@@ -20,17 +31,17 @@ class GerenciadorPaginas:
         # ------------------------------------------------------------
 
         cabecalho = ft.ListTile(
-            title=ft.Text(value="Controle Financeiro", weight=ft.FontWeight.BOLD, size=20, color=ft.Colors.WHITE),
-            subtitle=ft.Text(value="Ajuda Organizar as despesas pessoais", weight=ft.FontWeight.NORMAL, size=10, color=ft.Colors.WHITE),
-            leading=ft.Image(src="periquito_sertão.jpeg", fit=ft.ImageFit.CONTAIN, height=100, border_radius=100)
+            title=ft.Text(value="Controle Financeiro", weight=ft.FontWeight.BOLD, size=20, color=paleta["azul_claro"]),
+            subtitle=ft.Text(value="Ajuda Organizar as despesas pessoais", weight=ft.FontWeight.NORMAL, size=10, color=paleta["azul_claro"]),
+            leading=ft.Image(src="anl.jpg", fit=ft.ImageFit.CONTAIN, height=100, border_radius=100)
         )
         
 
         comp_saldo = ft.Container(
             content=ft.Column(
                 controls=[
-                    ft.Text(value="Saldo", weight=ft.FontWeight.BOLD, size=10, color=ft.Colors.WHITE38),
-                    ft.Text(value="R$ 10,000", size=40, color=ft.Colors.WHITE,weight=ft.FontWeight.BOLD, text_align=ft.alignment.center_right),
+                    ft.Text(value="Saldo", weight=ft.FontWeight.BOLD, size=10, color=paleta["laranja_fraco"]),
+                    ft.Text(value="R$ 10,000", size=40, color=paleta["azul_claro"], weight=ft.FontWeight.BOLD, text_align=ft.alignment.center_right),
                 ],
                 alignment=ft.alignment.center_right,
                 expand=True,
@@ -42,8 +53,8 @@ class GerenciadorPaginas:
             icon=ft.Icons.ADD,
             icon_size=40,
             on_click=lambda e:self._chama_formulario(), # chama o Método 2   
-            icon_color=ft.Colors.BLACK38,
-            bgcolor=ft.Colors.WHITE38
+            icon_color=paleta["laranja_forte"],
+            bgcolor=paleta["azul_claro"]
         )
 
         rodape = ft.Container(
@@ -113,13 +124,17 @@ class GerenciadorPaginas:
         botoes = ft.Row(
             controls=[
                 #ft.ElevatedButton("Salvar", on_click=self._salvar_formulario),
-                ft.ElevatedButton("Voltar", on_click=lambda e: self._pagina_inicial())
+                ft.ElevatedButton(text="Voltar", color=paleta["laranja_fraco"], on_click=lambda e: self._pagina_inicial(), bgcolor=paleta["azul_medio"])
             ],
             alignment=ft.MainAxisAlignment.END
         )
 
 
-        formulario = ft.Container()
+        formulario = ft.Container(
+            content=ft.Row([
+                botoes,
+            ])
+        )
 
         self.page.add(formulario)  
 
