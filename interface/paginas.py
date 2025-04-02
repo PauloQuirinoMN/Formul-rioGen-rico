@@ -1,5 +1,7 @@
 import flet as ft
 from visualizacoes.display import Display
+
+
 class GerenciadorPaginas:
     def __init__(self, page: ft.Page):
         """
@@ -17,28 +19,23 @@ class GerenciadorPaginas:
         # Método 1: Página Inicial (Tutorial + Botão criar formulário)
         # ------------------------------------------------------------
 
-        titulo = ft.Text(
-            value="Bem-vindo ao Controle Financeiro",
-            size=20,
-            weight=ft.FontWeight.BOLD,
-            color=ft.Colors.WHITE,            
+        cabecalho = ft.ListTile(
+            title=ft.Text(value="Controle Financeiro", weight=ft.FontWeight.BOLD, size=20, color=ft.Colors.WHITE),
+            subtitle=ft.Text(value="Ajuda Organizar as despesas pessoais", weight=ft.FontWeight.NORMAL, size=10, color=ft.Colors.WHITE),
+            leading=ft.Image(src="periquito_sertão.jpeg", fit=ft.ImageFit.CONTAIN, height=100, border_radius=100)
         )
+        
 
-        sub_titulo = ft.Text(
-            value=("O objetivo: ajudar organizar as despesas"),
-            size=10,
-            weight=ft.FontWeight.W_500,
-            color=ft.Colors.WHITE,            
-        )
-
-        instrucoes = ft.Text(
-            value="Como usar:\n"
-                "1. Clique em '+' para começar\n"
-                "2. Preencha os campos\n"
-                "3. Salve o registro!\n"
-                "4. Terá análise inicial de seus dados!\n",
-            size=10,
-            color=ft.Colors.WHITE38,
+        comp_saldo = ft.Container(
+            content=ft.Column(
+                controls=[
+                    ft.Text(value="Saldo", weight=ft.FontWeight.BOLD, size=10, color=ft.Colors.WHITE38),
+                    ft.Text(value="R$ 10,000", size=40, color=ft.Colors.WHITE,weight=ft.FontWeight.BOLD, text_align=ft.alignment.center_right),
+                ],
+                alignment=ft.alignment.center_right,
+                expand=True,
+                spacing=0,
+            )
         )
 
         botao = ft.IconButton(
@@ -50,6 +47,7 @@ class GerenciadorPaginas:
         )
 
         rodape = ft.Container(
+            expand=True,
             content=ft.Row(
             controls=[
                 ft.IconButton(
@@ -85,18 +83,15 @@ class GerenciadorPaginas:
             ft.Column(
                 expand=True,
                 controls=[
-                    titulo,
-                    sub_titulo,
-                    instrucoes,
-                    ft.Row([botao], alignment=ft.MainAxisAlignment.END),
-                    ft.Row(controls=[]),
-                    displayrs.componente,
-                    rodape,
+                    cabecalho,
+                    ft.Row([comp_saldo, botao], alignment=ft.MainAxisAlignment.SPACE_BETWEEN, spacing=5),
+                     displayrs.componente,
                 ],
                 alignment=ft.MainAxisAlignment.CENTER,
-                spacing=5,
+                spacing=30,
             )
         )
+
         self.page.update()
     
 
@@ -171,7 +166,6 @@ class GerenciadorPaginas:
                     alignment=ft.MainAxisAlignment.SPACE_AROUND
                 ),
                 comp_valor,
-
                 botoes,
             ],
             expand=True,
