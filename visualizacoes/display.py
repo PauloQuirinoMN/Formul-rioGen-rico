@@ -22,7 +22,7 @@ class Display:
     def _menu_display(self):
         """Tab para gerenciamneto de conteúdo """
         return  ft.Container(
-            bgcolor=paleta["azul_escuro"],
+            bgcolor=ft.Colors.TRANSPARENT,
             expand=True,
             content=ft.Tabs(
                 expand=True,
@@ -38,26 +38,26 @@ class Display:
                 animation_duration=300,
                 tabs=[
                     ft.Tab(
-                        tab_content=ft.Image(src="inf2.jpg", border_radius=100),
+                        tab_content=ft.Image(src="informacaoB.png", border_radius=100),
                         content=ft.Text(
-                        value="Bem-vindo ao Controle Financeiro\n"
-                        "O objetivo: ajudar organizar as despesas\n"
-                        "Como usar:\n"
-                        "1. Clique em '+' para começar\n"
-                        "2. Preencha os campos\n"
-                        "3. Salve o registro!\n"
-                        "4. Terá análise inicial de seus dados!\n",
-                        size=15,
-                        color=paleta["azul_claro"],
-                        text_align=ft.alignment.center,
+                            value="Bem-vindo ao Controle Financeiro\n"
+                            "O objetivo: ajudar organizar as despesas\n"
+                            "Como usar:\n"
+                            "1. Clique em '+' para começar\n"
+                            "2. Preencha os campos\n"
+                            "3. Salve o registro!\n"
+                            "4. Terá análise inicial de seus dados!\n",
+                            size=15,
+                            color=paleta["azul_claro"],
+                            text_align=ft.alignment.center,
                         )
                     ),
                     ft.Tab(
-                        tab_content=ft.Image(src="infor.jpg", border_radius=100),
+                        tab_content=ft.Image(src="resumo.jpeg", border_radius=100),
                         content=ft.Text("resumo", color=paleta["laranja_fraco"])
                     ),
                     ft.Tab(
-                        tab_content=ft.Image(src="analisidade.jpg", border_radius=100),
+                        tab_content=ft.Image(src="analise.jpeg", border_radius=100),
                         content=ft.Text("análise dados", color=paleta["laranja_fraco"])
                     ),
                     ft.Tab(

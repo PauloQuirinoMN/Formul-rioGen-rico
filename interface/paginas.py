@@ -1,6 +1,6 @@
 import flet as ft
 from visualizacoes.display import Display
-from utilitarios.funcoes_auxiliares import Contador
+from utilitarios.funcoes_auxiliares import Contador, GeraTipo
 
 
 
@@ -126,8 +126,7 @@ class GerenciadorPaginas:
             suffix_icon=ft.Icons.ATTACH_MONEY,
             label_style=ft.TextStyle(size=20, color=paleta["laranja_fraco"])
         )
-        comp_tipo = ft.Container()
-        comp_categoria = ft.Container()
+
         comp_perc_preço = ft.Container()
         comp_satisfacao = ft.Container()
         comp_felicidade = ft.Container()
@@ -154,14 +153,24 @@ class GerenciadorPaginas:
             expand=True,
         )
 
+          
+        comp_tipo = GeraTipo(['Dinheiro', 'Pix', 'Cartão', 'Fiado'])
+        comp_categoria = GeraTipo(['Pessoais', 'Vestuário', 'Lazer', 'Educação', 'Saúde', 'Transporte', 'Alimentação', 'Moradia'])
+
         formulario = ft.Container(
             content=ft.Column(
                 [
                     comp_desc_valor_qt,
                     comp_valor,
+                    ft.Text(value="Tipo de transação", size=12),
+                    comp_tipo,
+                    ft.Text(value="Categoria de transação", size=12),
+                    comp_categoria,
                     botoes,
                 ],
-                alignment=ft.alignment.top_center,
+                alignment=ft.MainAxisAlignment.START,
+                horizontal_alignment=ft.CrossAxisAlignment.START,
+                spacing=15,
             )
         )
 

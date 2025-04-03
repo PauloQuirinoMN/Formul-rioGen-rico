@@ -1,6 +1,7 @@
 import flet as ft
 
 class Contador(ft.Container): 
+    
     # herdando diretamente de Container
     def __init__(self):
         super().__init__()
@@ -44,4 +45,44 @@ class Contador(ft.Container):
         self.txt_number.update()
        
         
+class GeraTipo(ft.Container):
+    def __init__(self, lista=None):
+        super().__init__()
 
+
+        self.bgcolor = ft.Colors.BLACK38
+        self.border_radius = ft.border_radius.all(15)
+        self.expand = True
+        self.padding = 10
+
+        self.lista = lista if lista is not None else []
+
+        # Cria a linha responsiva
+        self.responsive_row = ft.ResponsiveRow(controls=[], spacing=10)
+        self.content = self.responsive_row
+
+        # Gera os checkboxes
+        self._gera_conj_check()
+
+    
+    def _gera_conj_check(self):
+        """ Gera os checkboxes baseados na lista """
+
+        self.responsive_row.controls.clear()
+    
+        for nome in self.lista:
+            chk = ft.Container(
+                alignment=ft.alignment.center,
+                margin=0,
+                padding=2,
+                expand=True,
+                col=4,
+                content=ft.Checkbox(
+                label=str(nome),
+                value=False,
+                label_style=ft.TextStyle(color=ft.Colors.WHITE, size=12)
+            )
+            )
+            self.responsive_row.controls.append(chk)
+
+        
