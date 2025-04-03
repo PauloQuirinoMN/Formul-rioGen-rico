@@ -111,12 +111,21 @@ class GerenciadorPaginas:
         self.page.clean()
 
         comp_descricao = ft.TextField(
+            expand=True,
             label="Descrição",
+            border=None,
+            label_style=ft.TextStyle(size=20, color=paleta["laranja_fraco"]),
         )
 
 
         
-        comp_valor = ft.Container()
+        comp_valor = ft.TextField(
+            expand=True,
+            border=None,
+            label="Valor",
+            suffix_icon=ft.Icons.ATTACH_MONEY,
+            label_style=ft.TextStyle(size=20, color=paleta["laranja_fraco"])
+        )
         comp_tipo = ft.Container()
         comp_categoria = ft.Container()
         comp_perc_preço = ft.Container()
@@ -134,11 +143,26 @@ class GerenciadorPaginas:
 
         qtd = Contador()
 
-        formulario = ft.Container(
-            content=ft.Row([
+        comp_desc_valor_qt = ft.Row(
+            [
+                comp_descricao,
+                ft.Text(value=" X ", size=15, color=paleta["azul_medio"]),
                 qtd,
-                botoes,
-            ])
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+            spacing=5,
+            expand=True,
+        )
+
+        formulario = ft.Container(
+            content=ft.Column(
+                [
+                    comp_desc_valor_qt,
+                    comp_valor,
+                    botoes,
+                ],
+                alignment=ft.alignment.top_center,
+            )
         )
 
         self.page.add(formulario)  
