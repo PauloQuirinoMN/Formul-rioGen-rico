@@ -22,18 +22,18 @@ class Display:
     def _menu_display(self):
         """Tab para gerenciamneto de conteúdo """
         return  ft.Container(
-            bgcolor=ft.Colors.TRANSPARENT,
             expand=True,
             content=ft.Tabs(
                 expand=True,
                 label_padding=10,
+                scrollable=False,
                 indicator_tab_size=True,
                 indicator_padding=1,
                 label_color=paleta["laranja_fraco"],
                 divider_height=2,
                 divider_color=paleta["laranja_forte"],
                 indicator_thickness=2,
-                tab_alignment=ft.TabAlignment.CENTER,
+                tab_alignment=ft.TabAlignment.FILL,
                 selected_index=0,
                 animation_duration=300,
                 tabs=[

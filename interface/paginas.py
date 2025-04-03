@@ -97,7 +97,7 @@ class GerenciadorPaginas:
                 controls=[
                     cabecalho,
                     ft.Row([comp_saldo, botao], alignment=ft.MainAxisAlignment.SPACE_BETWEEN, spacing=5),
-                     displayrs.componente,
+                    ft.Column([displayrs.componente], alignment=ft.MainAxisAlignment.CENTER,spacing=5, expand=True),
                 ],
                 alignment=ft.MainAxisAlignment.CENTER,
                 spacing=30,
