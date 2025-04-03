@@ -1,5 +1,6 @@
 import flet as ft
 from visualizacoes.display import Display
+from utilitarios.funcoes_auxiliares import Contador
 
 
 
@@ -112,7 +113,9 @@ class GerenciadorPaginas:
         comp_descricao = ft.TextField(
             label="Descrição",
         )
-        comp_qt = ft.Container()
+
+
+        
         comp_valor = ft.Container()
         comp_tipo = ft.Container()
         comp_categoria = ft.Container()
@@ -129,9 +132,11 @@ class GerenciadorPaginas:
             alignment=ft.MainAxisAlignment.END
         )
 
+        qtd = Contador()
 
         formulario = ft.Container(
             content=ft.Row([
+                qtd,
                 botoes,
             ])
         )
