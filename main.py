@@ -14,7 +14,7 @@ def main(page: ft.Page):
     page.title = "FormuláriosDinâmicos"
     page.horizontal_alignment = "center"
     page.vertical_alignment = "center"
-    page.bgcolor = "#ff9800"
+    page.bgcolor = "whate"
     page.padding = ft.padding.all(20)
 
 

@@ -1,5 +1,6 @@
 import flet as ft
 
+
 class Contador(ft.Container): 
     
     # herdando diretamente de Container
@@ -44,7 +45,7 @@ class Contador(ft.Container):
         self.txt_number.value = str(int(self.txt_number.value) + 1)
         self.txt_number.update()
        
-        
+
 class GeraTipo(ft.Container):
     def __init__(self, lista=None):
         super().__init__()
@@ -80,7 +81,7 @@ class GeraTipo(ft.Container):
                 content=ft.Checkbox(
                 label=str(nome),
                 value=False,
-                label_style=ft.TextStyle(color=ft.Colors.WHITE, size=12)
+                label_style=ft.TextStyle(color="#2f2c79", size=12)
             )
             )
             self.responsive_row.controls.append(chk)

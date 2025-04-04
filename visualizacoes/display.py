@@ -38,10 +38,9 @@ class Display:
                 animation_duration=300,
                 tabs=[
                     ft.Tab(
-                        tab_content=ft.Image(src="informacaoB.png", border_radius=100),
+                        tab_content=ft.Image(src="informar.png", border_radius=100),
                         content=ft.Text(
-                            value="Bem-vindo ao Controle Financeiro\n"
-                            "O objetivo: ajudar organizar as despesas\n"
+                            value=
                             "Como usar:\n"
                             "1. Clique em '+' para começar\n"
                             "2. Preencha os campos\n"
@@ -54,15 +53,15 @@ class Display:
                     ),
                     ft.Tab(
                         tab_content=ft.Image(src="resumo.jpeg", border_radius=100),
-                        content=ft.Text("resumo", color=paleta["laranja_fraco"])
+                        content=ft.Text("resumo", color=paleta["azul_claro"])
                     ),
                     ft.Tab(
-                        tab_content=ft.Image(src="analise.jpeg", border_radius=100),
-                        content=ft.Text("análise dados", color=paleta["laranja_fraco"])
+                        tab_content=ft.Image(src="analise_dd.png", border_radius=100),
+                        content=ft.Text("análise dados", color=paleta["azul_claro"])
                     ),
                     ft.Tab(
-                        tab_content=ft.Image(src="add1.jpg", border_radius=100),
-                        content=ft.Text("powerbi", color=paleta["laranja_fraco"])
+                        tab_content=ft.Image(src="ideia.png", border_radius=100),
+                        content=ft.Text("powerbi", color=paleta["azul_claro"])
                     ),
                 ],
 
