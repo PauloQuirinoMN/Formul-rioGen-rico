@@ -1,6 +1,6 @@
 import flet as ft
 from visualizacoes.display import Display
-from utilitarios.funcoes_auxiliares import Contador, GeraTipo
+from utilitarios.funcoes_auxiliares import Contador, GeraTipo, GeraProgresso
 
 
 
@@ -34,7 +34,7 @@ class GerenciadorPaginas:
         cabecalho = ft.ListTile(
             title=ft.Text(value="Controle Financeiro", weight=ft.FontWeight.BOLD, size=20, color=paleta["azul_claro"]),
             subtitle=ft.Text(value="Ajuda Organizar as despesas pessoais", weight=ft.FontWeight.NORMAL, size=10, color=paleta["azul_claro"]),
-            leading=ft.Image(src="anl.jpg", fit=ft.ImageFit.CONTAIN, height=100, border_radius=100)
+            leading=ft.Image(src="Q.png", fit=ft.ImageFit.CONTAIN, height=100, border_radius=100)
         )
         
 
@@ -42,7 +42,12 @@ class GerenciadorPaginas:
             content=ft.Column(
                 controls=[
                     ft.Text(value="Saldo", weight=ft.FontWeight.BOLD, size=10, color=paleta["laranja_fraco"]),
-                    ft.Text(value="R$ 10,000", size=40, color=paleta["azul_claro"], weight=ft.FontWeight.BOLD, text_align=ft.alignment.center_right),
+                    ft.Row(
+                        [
+                            ft.Image(src="real.png", fit=ft.ImageFit.CONTAIN, height=30, border_radius=30), 
+                            ft.Text(value="10,000", size=40, color=paleta["azul_claro"], weight=ft.FontWeight.BOLD, text_align=ft.alignment.center_right)
+                        ], 
+                        alignment=ft.MainAxisAlignment.START),
                 ],
                 alignment=ft.alignment.center_right,
                 expand=True,
@@ -109,6 +114,7 @@ class GerenciadorPaginas:
 
     def _chama_formulario(self):
         self.page.clean()
+        self.page.bgcolor = paleta["laranja_forte"]
 
         comp_descricao = ft.TextField(
             expand=True,
@@ -126,10 +132,6 @@ class GerenciadorPaginas:
             suffix_icon=ft.Icons.ATTACH_MONEY,
             label_style=ft.TextStyle(size=20, color=paleta["laranja_fraco"])
         )
-
-        comp_perc_preço = ft.Container()
-        comp_satisfacao = ft.Container()
-        comp_felicidade = ft.Container()
 
         # Botões
         botoes = ft.Row(
@@ -157,21 +159,33 @@ class GerenciadorPaginas:
         comp_tipo = GeraTipo(['Dinheiro', 'Pix', 'Cartão', 'Fiado'])
         comp_categoria = GeraTipo(['Pessoais', 'Vestuário', 'Lazer', 'Educação', 'Saúde', 'Transporte', 'Alimentação', 'Moradia'])
 
+        barra_preco = GeraProgresso(titulo="Preço")
+        barra_satisfacao = GeraProgresso(titulo="Satisfação")
+        barra_felicidade = GeraProgresso(titulo="Felicidade")
+
+
         formulario = ft.Container(
             content=ft.Column(
                 [
                     comp_desc_valor_qt,
                     comp_valor,
-                    ft.Text(value="Tipo de transação", size=12),
+                    ft.Text(value="Tipo", size=12, color=paleta["azul_claro"]),
                     comp_tipo,
-                    ft.Text(value="Categoria de transação", size=12),
+                    ft.Text(value="Categoria", size=12, color=paleta["azul_claro"]),
                     comp_categoria,
+                    ft.Text(value="Sua Percepção"),
+                    barra_preco,
+                    barra_satisfacao,
+                    barra_felicidade,
                     botoes,
                 ],
                 alignment=ft.MainAxisAlignment.START,
                 horizontal_alignment=ft.CrossAxisAlignment.START,
                 spacing=15,
-            )
+                scroll=ft.ScrollMode.HIDDEN,
+                expand=True,
+            ),
+            expand=True
         )
 
         self.page.add(formulario)  

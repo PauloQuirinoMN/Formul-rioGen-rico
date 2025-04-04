@@ -86,4 +86,127 @@ class GeraTipo(ft.Container):
             )
             self.responsive_row.controls.append(chk)
 
+
+import flet as ft
+
+class GeraProgresso(ft.Container):
+    def __init__(self, titulo="Progresso"):  # Remova o conteudo=None se não for usar
+        super().__init__()  # Chama o init do Container sem argumentos
         
+        self.titulo = titulo
+        self.valor = 0  # Valor inicial
+        
+        # Cria os componentes
+        self._criar_componentes()
+        
+        # Configura o layout
+        self._configurar_layout()
+        
+        # Estilização básica
+        self.padding = 10
+        self.border_radius = 8
+        self.bgcolor = ft.colors.GREY_200
+    
+    def _criar_componentes(self):
+        """Cria todos os componentes UI"""
+        self.label_titulo = ft.Text(value=self.titulo)
+        self.label_valor = ft.Text(value=f"{self.valor}%")
+        self.slider = ft.Slider(
+            min=0,
+            max=100,
+            divisions=100,
+            value=self.valor,
+            label="{value}%",
+            on_change=self._atualizar_valor
+        )
+    
+    def _configurar_layout(self):
+        """Configura o layout do container"""
+        self.content = ft.Column(
+            controls=[
+                ft.Row(
+                    controls=[
+                        self.label_titulo,
+                        self.label_valor
+                    ],
+                    alignment=ft.MainAxisAlignment.SPACE_BETWEEN
+                ),
+                self.slider
+            ],
+            spacing=10
+        )
+    
+    def _atualizar_valor(self, e):
+        """Atualiza o valor quando o slider é movido"""
+        self.valor = int(e.control.value)
+        self.label_valor.value = f"{self.valor}%"
+        self.update()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # def __init__(self, titulo='Progresso'): 
+    #     super(). __init__()
+
+    #     self.titulo = titulo
+    #     self.valor = valor_inicial
+    #     self.expand = True
+
+
+    #     # Componentes UI
+    #     self.label_titulo = ft.Text(
+    #         value=self.titulo,
+    #         weight=ft.FontWeight.BOLD,
+    #         size=14
+    #     )
+
+    #     ft.Text("Slider with value:"),
+    #     ft.Slider(value=0.3),
+    #     ft.Text("Slider with a custom range and label:"),
+    #     ft.Slider(min=0, max=100, divisions=10, label="{value}%")
+
+    #     # Layout
+    #     self.controls = [
+    #         ft.Row([self.label_titulo, self.label_valor], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
+    #         self.slider_controle
+    #     ]
+    #     self.spacing = 5
+
+    # def atualizar_valor(self, e):
+    #     """Atualiza o valor da progressbar quando o slider é movido"""
+    #     self.valor = int(e.control.value)
+    #     self.progress_bar.value = self.valor/100
+    #     self.label_valor.value = f"{self.valor}%"
+    #     self.update()
+
+    # def definir_valor(self, novo_valor):
+    #     """Define o valor programaticamente"""
+    #     self.valor = max(0, min(100, novo_valor))  # Garante valor entre 0-100
+    #     self.progress_bar.value = self.valor/100
+    #     self.slider_controle.value = self.valor
+    #     self.label_valor.value = f"{self.valor}%"
+    #     self.update()

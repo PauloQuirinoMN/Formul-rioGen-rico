@@ -52,7 +52,7 @@ class Display:
                         )
                     ),
                     ft.Tab(
-                        tab_content=ft.Image(src="resumo.jpeg", border_radius=100),
+                        tab_content=ft.Image(src="resumo.png", border_radius=100),
                         content=ft.Text("resumo", color=paleta["azul_claro"])
                     ),
                     ft.Tab(
