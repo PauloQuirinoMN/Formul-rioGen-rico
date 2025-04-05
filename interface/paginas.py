@@ -114,23 +114,25 @@ class GerenciadorPaginas:
 
     def _chama_formulario(self):
         self.page.clean()
-        self.page.bgcolor = paleta["laranja_forte"]
+        #self.page.bgcolor = paleta["laranja_forte"]
 
         comp_descricao = ft.TextField(
             expand=True,
+            border=ft.InputBorder.UNDERLINE,
             label="Descrição",
-            border=None,
-            label_style=ft.TextStyle(size=20, color=paleta["laranja_fraco"]),
+            label_style=ft.TextStyle(size=20, color=paleta["azul_medio"]),
         )
 
 
         
         comp_valor = ft.TextField(
             expand=True,
-            border=None,
+            border_radius=ft.border_radius.all(15),
+            bgcolor=paleta["azul_claro"],
+            border=ft.InputBorder.NONE,
             label="Valor",
-            suffix_icon=ft.Icons.ATTACH_MONEY,
-            label_style=ft.TextStyle(size=20, color=paleta["laranja_fraco"])
+            suffix_icon=ft.Image(src="real.png", fit=ft.ImageFit.CONTAIN,width=20,height=20, border_radius=100),
+            label_style=ft.TextStyle(size=20, color=paleta["azul_medio"])
         )
 
         # Botões
@@ -155,8 +157,8 @@ class GerenciadorPaginas:
             expand=True,
         )
 
-          
-        comp_tipo = GeraTipo(['Dinheiro', 'Pix', 'Cartão', 'Fiado'])
+        
+        comp_forma = GeraTipo(['Dinheiro', 'Pix', 'Cartão', 'Fiado'])
         comp_categoria = GeraTipo(['Pessoais', 'Vestuário', 'Lazer', 'Educação', 'Saúde', 'Transporte', 'Alimentação', 'Moradia'])
 
         barra_preco = GeraProgresso(titulo="Preço")
@@ -169,8 +171,10 @@ class GerenciadorPaginas:
                 [
                     comp_desc_valor_qt,
                     comp_valor,
-                    ft.Text(value="Tipo", size=12, color=paleta["azul_claro"]),
-                    comp_tipo,
+                    ft.Text(value="Tipo"),
+                    ft.Row([ft.TextButton(icon=ft.Icons.SAVINGS, text="Receitas"), ft.TextButton(icon=ft.Icons.MONEY_OFF, text="Despesas")], alignment=ft.MainAxisAlignment.SPACE_AROUND),
+                    ft.Text(value="Forma", size=12, color=paleta["azul_claro"]),
+                    comp_forma,
                     ft.Text(value="Categoria", size=12, color=paleta["azul_claro"]),
                     comp_categoria,
                     ft.Text(value="Sua Percepção"),

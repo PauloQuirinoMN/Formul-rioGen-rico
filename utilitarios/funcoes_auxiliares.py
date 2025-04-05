@@ -10,27 +10,30 @@ class Contador(ft.Container):
         self.margin = 5
         self.expand = True
 
-        self.txt_number = ft.TextField(value="0", text_align=ft.TextAlign.CENTER, color=ft.Colors.WHITE, expand=True)
+        self.txt_number = ft.TextField(value="0", text_align=ft.TextAlign.CENTER, color=ft.Colors.BLUE_700, expand=True,border=ft.InputBorder.NONE)
 
         
         self.content = ft.Row(
+            spacing=0,
             controls=[
                 self.txt_number,
                 ft.Column([
                     ft.IconButton(
                         ft.Icons.ADD,
-                        icon_size=10,
-                        icon_color=ft.Colors.WHITE,
+                        icon_size=15,
+                        icon_color=ft.Colors.BLUE_200,
                         on_click=lambda e: self._plus_click(e)
                     ),
                     ft.IconButton(
                         ft.Icons.REMOVE,
-                        icon_size=10,
-                        icon_color=ft.Colors.WHITE,
+                        icon_size=15,
+                        icon_color=ft.Colors.BLUE_200,
                         on_click=lambda e: self._minus_click(e)
                 ),
                 ], 
-                alignment=ft.MainAxisAlignment.CENTER)
+                alignment=ft.MainAxisAlignment.CENTER,
+                spacing=0
+                )
             ],
             alignment=ft.MainAxisAlignment.CENTER,
         )
@@ -51,7 +54,7 @@ class GeraTipo(ft.Container):
         super().__init__()
 
 
-        self.bgcolor = ft.Colors.BLACK38
+        self.bgcolor = ft.Colors.TRANSPARENT
         self.border_radius = ft.border_radius.all(15)
         self.expand = True
         self.padding = 10
@@ -105,7 +108,6 @@ class GeraProgresso(ft.Container):
         # Estilização básica
         self.padding = 10
         self.border_radius = 8
-        self.bgcolor = ft.colors.GREY_200
     
     def _criar_componentes(self):
         """Cria todos os componentes UI"""
