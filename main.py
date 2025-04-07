@@ -11,7 +11,7 @@ paleta = {
 }
 
 def main(page: ft.Page):
-    page.title = "FormuláriosDinâmicos"
+    page.title = "Q_Soluções"
     page.horizontal_alignment = "center"
     page.vertical_alignment = "center"
     page.bgcolor = ft.Colors.WHITE

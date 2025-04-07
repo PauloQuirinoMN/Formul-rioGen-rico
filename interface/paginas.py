@@ -34,7 +34,7 @@ class GerenciadorPaginas:
         cabecalho = ft.ListTile(
             title=ft.Text(value="Controle Financeiro", weight=ft.FontWeight.BOLD, size=20, color=paleta["azul_claro"]),
             subtitle=ft.Text(value="Ajuda Organizar as despesas pessoais", weight=ft.FontWeight.NORMAL, size=10, color=paleta["azul_claro"]),
-            leading=ft.Image(src="Q.png", fit=ft.ImageFit.CONTAIN, height=100, border_radius=100)
+            leading=ft.Image(src="farol.png", fit=ft.ImageFit.CONTAIN, height=100, border_radius=100)
         )
         
 
@@ -118,7 +118,8 @@ class GerenciadorPaginas:
 
         comp_descricao = ft.TextField(
             expand=True,
-            border=ft.InputBorder.UNDERLINE,
+            border_radius=15,
+            border=ft.InputBorder.OUTLINE,
             label="Descrição",
             label_style=ft.TextStyle(size=20, color=paleta["azul_medio"]),
         )
@@ -127,12 +128,12 @@ class GerenciadorPaginas:
         
         comp_valor = ft.TextField(
             expand=True,
+            border=ft.InputBorder.OUTLINE,
             border_radius=ft.border_radius.all(15),
-            bgcolor=paleta["azul_claro"],
-            border=ft.InputBorder.NONE,
             label="Valor",
-            suffix_icon=ft.Image(src="real.png", fit=ft.ImageFit.CONTAIN,width=20,height=20, border_radius=100),
-            label_style=ft.TextStyle(size=20, color=paleta["azul_medio"])
+            text_align=ft.TextAlign.END,
+            prefix_icon=ft.Image(src="real.png", fit=ft.ImageFit.CONTAIN,width=20,height=20, border_radius=100),
+            label_style=ft.TextStyle(size=20, color=paleta["laranja_fraco"])
         )
 
         # Botões
@@ -145,19 +146,8 @@ class GerenciadorPaginas:
         )
 
         qtd = Contador()
-
-        comp_desc_valor_qt = ft.Row(
-            [
-                comp_descricao,
-                ft.Text(value=" X ", size=15, color=paleta["azul_medio"]),
-                qtd,
-            ],
-            alignment=ft.MainAxisAlignment.CENTER,
-            spacing=5,
-            expand=True,
-        )
-
-        
+        comp_descricao,
+           
         comp_forma = GeraTipo(['Dinheiro', 'Pix', 'Cartão', 'Fiado'])
         comp_categoria = GeraTipo(['Pessoais', 'Vestuário', 'Lazer', 'Educação', 'Saúde', 'Transporte', 'Alimentação', 'Moradia'])
 
@@ -165,14 +155,61 @@ class GerenciadorPaginas:
         barra_satisfacao = GeraProgresso(titulo="Satisfação")
         barra_felicidade = GeraProgresso(titulo="Felicidade")
 
+        def mostra_tipo(e):
+            valor = e.control.content.controls[1].value
+            tam_padao = 60
+            tam_expandido = 80
+            if e.control.content.controls[0].height == tam_padao:
+                e.control.content.controls[0].height = tam_expandido
+            else:
+                e.control.content.controls[0].height = tam_padao
+                
+            e.control.update()
+
+            
+            print(valor)
+
+        receita = ft.Container(
+            border_radius=10,
+            padding=0,
+            on_click=mostra_tipo, 
+            content=ft.Column(
+                spacing=2,
+                controls=[
+                    ft.Image(src="receitar.png", fit=ft.ImageFit.CONTAIN, height=60, border_radius=100),
+                    ft.Text(value="Receitas", color=paleta["azul_claro"], size=12,text_align=ft.TextAlign.CENTER)
+                ]
+            )
+        )
+
+        despesa = ft.Container(
+            border_radius=10,
+            padding=0,
+            on_click=mostra_tipo,           
+            content=ft.Column(
+                spacing=2,
+                controls=[
+                    ft.Image(src="receita.png", fit=ft.ImageFit.CONTAIN, height=60, border_radius=100),
+                    ft.Text(value="Despesas", color=paleta["azul_claro"], size=12,text_align=ft.TextAlign.CENTER)
+                ]
+            )
+        )
+
+
 
         formulario = ft.Container(
             content=ft.Column(
                 [
-                    comp_desc_valor_qt,
-                    comp_valor,
+                    comp_descricao,
+                    ft.Row([qtd, comp_valor], alignment=ft.MainAxisAlignment.SPACE_AROUND, expand=True, spacing=0),
                     ft.Text(value="Tipo"),
-                    ft.Row([ft.TextButton(icon=ft.Icons.SAVINGS, text="Receitas"), ft.TextButton(icon=ft.Icons.MONEY_OFF, text="Despesas")], alignment=ft.MainAxisAlignment.SPACE_AROUND),
+                    ft.Row(
+                        [
+                        receita,
+                        despesa                        
+                        ], 
+                        alignment=ft.MainAxisAlignment.SPACE_EVENLY,
+                    ),
                     ft.Text(value="Forma", size=12, color=paleta["azul_claro"]),
                     comp_forma,
                     ft.Text(value="Categoria", size=12, color=paleta["azul_claro"]),
@@ -183,13 +220,13 @@ class GerenciadorPaginas:
                     barra_felicidade,
                     botoes,
                 ],
-                alignment=ft.MainAxisAlignment.START,
-                horizontal_alignment=ft.CrossAxisAlignment.START,
-                spacing=15,
+                alignment=ft.MainAxisAlignment.CENTER,
+                spacing=0,
                 scroll=ft.ScrollMode.HIDDEN,
                 expand=True,
             ),
-            expand=True
+            expand=True,
+            padding=5,
         )
 
         self.page.add(formulario)  

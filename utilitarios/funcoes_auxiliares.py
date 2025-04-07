@@ -10,7 +10,7 @@ class Contador(ft.Container):
         self.margin = 5
         self.expand = True
 
-        self.txt_number = ft.TextField(value="0", text_align=ft.TextAlign.CENTER, color=ft.Colors.BLUE_700, expand=True,border=ft.InputBorder.NONE)
+        self.txt_number = ft.TextField(value="0", text_align=ft.TextAlign.CENTER, color=ft.Colors.BLUE_700, expand=True, border=ft.InputBorder.NONE)
 
         
         self.content = ft.Row(
@@ -32,7 +32,8 @@ class Contador(ft.Container):
                 ),
                 ], 
                 alignment=ft.MainAxisAlignment.CENTER,
-                spacing=0
+                spacing=0,
+                expand=True,
                 )
             ],
             alignment=ft.MainAxisAlignment.CENTER,
