@@ -7,10 +7,11 @@ class Contador(ft.Container):
     def __init__(self):
         super().__init__()
         self.padding = 10
-        self.margin = 5
+        self.border_radius = 15
+        self.margin = 0
         self.expand = True
 
-        self.txt_number = ft.TextField(value="0", text_align=ft.TextAlign.CENTER, color=ft.Colors.BLUE_700, expand=True, border=ft.InputBorder.NONE)
+        self.txt_number = ft.TextField(value="0", text_align=ft.TextAlign.CENTER, text_size=20, color=ft.Colors.BLACK, expand=True, border=ft.InputBorder.NONE)
 
         
         self.content = ft.Row(
@@ -21,18 +22,18 @@ class Contador(ft.Container):
                     ft.IconButton(
                         ft.Icons.ADD,
                         icon_size=15,
-                        icon_color=ft.Colors.BLUE_200,
+                        icon_color=ft.Colors.BLACK,
                         on_click=lambda e: self._plus_click(e)
                     ),
                     ft.IconButton(
                         ft.Icons.REMOVE,
                         icon_size=15,
-                        icon_color=ft.Colors.BLUE_200,
+                        icon_color=ft.Colors.BLACK,
                         on_click=lambda e: self._minus_click(e)
-                ),
+                    ),
                 ], 
                 alignment=ft.MainAxisAlignment.CENTER,
-                spacing=0,
+                spacing=5,
                 expand=True,
                 )
             ],
