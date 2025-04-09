@@ -42,10 +42,15 @@ class Display:
                         content=ft.Text(
                             value=
                             "Como usar:\n"
-                            "1. Clique em '+' para começar\n"
-                            "2. Preencha os campos\n"
-                            "3. Salve o registro!\n"
-                            "4. Terá análise inicial de seus dados!\n",
+                            "1. Clique em '+' para começar\n"\
+                            "2. Preencha os campos\n"\
+                            "3. Salve o registro!\n"\
+                            "4. Terá análise inicial de seus dados!\n"\
+                            "\n" \
+                            "📱 Seu Controle Financeiro Inteligente" \
+                            "Este app foi desenvolvido para transformar " \
+                            "a maneira como você organiza suas finanças pessoais, combinando praticidade e inteligência de dados." \
+                            "",
                             size=15,
                             color=paleta["azul_claro"],
                             text_align=ft.alignment.center,

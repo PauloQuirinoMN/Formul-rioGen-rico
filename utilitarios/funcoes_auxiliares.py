@@ -33,7 +33,7 @@ class Contador(ft.Container):
                     ),
                 ], 
                 alignment=ft.MainAxisAlignment.CENTER,
-                spacing=5,
+                spacing=0,
                 expand=True,
                 )
             ],
@@ -146,71 +146,22 @@ class GeraProgresso(ft.Container):
         self.label_valor.value = f"{self.valor}%"
         self.update()
 
+class GerenciadorContainer:
+        def __init__(self, container_receita, container_despesa):
+            self.receita = container_receita
+            self.despesa = container_despesa
+            self.tam_padrao = 60
+            self.tam_expandido = 80
+        
+        def alternar_tamanho(self, container_clicado):
+            # Expande o clicado e reduz o outro
+            if container_clicado == self.receita:
+                self.receita.content.controls[0].height = self.tam_expandido
+                self.despesa.content.controls[0].height = self.tam_padrao
+            else:
+                self.despesa.content.controls[0].height = self.tam_expandido
+                self.receita.content.controls[0].height = self.tam_padrao
+            
+            self.receita.update()
+            self.despesa.update()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # def __init__(self, titulo='Progresso'): 
-    #     super(). __init__()
-
-    #     self.titulo = titulo
-    #     self.valor = valor_inicial
-    #     self.expand = True
-
-
-    #     # Componentes UI
-    #     self.label_titulo = ft.Text(
-    #         value=self.titulo,
-    #         weight=ft.FontWeight.BOLD,
-    #         size=14
-    #     )
-
-    #     ft.Text("Slider with value:"),
-    #     ft.Slider(value=0.3),
-    #     ft.Text("Slider with a custom range and label:"),
-    #     ft.Slider(min=0, max=100, divisions=10, label="{value}%")
-
-    #     # Layout
-    #     self.controls = [
-    #         ft.Row([self.label_titulo, self.label_valor], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
-    #         self.slider_controle
-    #     ]
-    #     self.spacing = 5
-
-    # def atualizar_valor(self, e):
-    #     """Atualiza o valor da progressbar quando o slider é movido"""
-    #     self.valor = int(e.control.value)
-    #     self.progress_bar.value = self.valor/100
-    #     self.label_valor.value = f"{self.valor}%"
-    #     self.update()
-
-    # def definir_valor(self, novo_valor):
-    #     """Define o valor programaticamente"""
-    #     self.valor = max(0, min(100, novo_valor))  # Garante valor entre 0-100
-    #     self.progress_bar.value = self.valor/100
-    #     self.slider_controle.value = self.valor
-    #     self.label_valor.value = f"{self.valor}%"
-    #     self.update()

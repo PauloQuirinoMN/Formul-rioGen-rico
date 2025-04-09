@@ -15,7 +15,7 @@ def main(page: ft.Page):
     page.horizontal_alignment = "center"
     page.vertical_alignment = "center"
     page.bgcolor = ft.Colors.WHITE
-    page.padding = ft.padding.all(20)
+    page.padding = ft.padding.all(10)
     page.expand = True
 
 

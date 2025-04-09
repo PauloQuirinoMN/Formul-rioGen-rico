@@ -1,6 +1,6 @@
 import flet as ft
 from visualizacoes.display import Display
-from utilitarios.funcoes_auxiliares import Contador, GeraTipo, GeraProgresso
+from utilitarios.funcoes_auxiliares import Contador, GeraTipo, GeraProgresso, GerenciadorContainer
 
 
 
@@ -21,6 +21,7 @@ class GerenciadorPaginas:
         :param page: Referência à pagina do flet (obrigatório para atualizar a UI)
         
         """
+        
         self.page = page
         self._pagina_inicial()
         
@@ -115,6 +116,8 @@ class GerenciadorPaginas:
     def _chama_formulario(self):
         self.page.clean()
         #self.page.bgcolor = paleta["laranja_forte"]
+        def mostra_tipo(e):
+            gerenciador.alternar_tamanho(e.control)
 
         comp_descricao = ft.TextField(
             expand=True,
@@ -123,9 +126,6 @@ class GerenciadorPaginas:
             label="Descrição",
             label_style=ft.TextStyle(size=20, color=paleta["azul_medio"]),
         )
-
-
-        
         comp_valor = ft.TextField(
             expand=True,
             border=ft.InputBorder.OUTLINE,
@@ -155,21 +155,8 @@ class GerenciadorPaginas:
         barra_satisfacao = GeraProgresso(titulo="Satisfação")
         barra_felicidade = GeraProgresso(titulo="Felicidade")
 
-        def mostra_tipo(e):
-            valor = e.control.content.controls[1].value
-            tam_padao = 60
-            tam_expandido = 80
-            if e.control.content.controls[0].height == tam_padao:
-                e.control.content.controls[0].height = tam_expandido
-            else:
-                e.control.content.controls[0].height = tam_padao
-                
-            e.control.update()
-
-            
-            print(valor)
-
         receita = ft.Container(
+            data=0,
             border_radius=10,
             padding=0,
             on_click=mostra_tipo, 
@@ -178,11 +165,14 @@ class GerenciadorPaginas:
                 controls=[
                     ft.Image(src="receitar.png", fit=ft.ImageFit.CONTAIN, height=60, border_radius=100),
                     ft.Text(value="Receitas", color=paleta["azul_claro"], size=12,text_align=ft.TextAlign.CENTER)
-                ]
+                ],
+                alignment=ft.MainAxisAlignment.CENTER,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
             )
         )
 
         despesa = ft.Container(
+            data=0,
             border_radius=10,
             padding=0,
             on_click=mostra_tipo,           
@@ -191,12 +181,14 @@ class GerenciadorPaginas:
                 controls=[
                     ft.Image(src="receita.png", fit=ft.ImageFit.CONTAIN, height=60, border_radius=100),
                     ft.Text(value="Despesas", color=paleta["azul_claro"], size=12,text_align=ft.TextAlign.CENTER)
-                ]
+                ],
+                alignment=ft.MainAxisAlignment.CENTER,
+                horizontal_alignment=ft.MainAxisAlignment.CENTER,
             )
         )
 
-
-
+        gerenciador = GerenciadorContainer(receita, despesa)
+        
         formulario = ft.Container(
             content=ft.Column(
                 [
