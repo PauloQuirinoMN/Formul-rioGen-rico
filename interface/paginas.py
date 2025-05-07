@@ -35,7 +35,7 @@ class GerenciadorPaginas:
         cabecalho = ft.ListTile(
             title=ft.Text(value="Controle Financeiro", weight=ft.FontWeight.BOLD, size=20, color=paleta["azul_claro"]),
             subtitle=ft.Text(value="Ajuda Organizar as despesas pessoais", weight=ft.FontWeight.NORMAL, size=10, color=paleta["azul_claro"]),
-            leading=ft.Image(src="farol.png", fit=ft.ImageFit.CONTAIN, height=100, border_radius=100)
+            leading=ft.Image(src="periquito.png", fit=ft.ImageFit.CONTAIN, height=100, border_radius=100)
         )
         
 
