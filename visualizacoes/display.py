@@ -69,8 +69,6 @@ class Display:
                         content=ft.Text("powerbi", color=paleta["azul_claro"])
                     ),
                 ],
-
-                
             )
         )
             

@@ -16,29 +16,19 @@ paleta = {
 
 class GerenciadorPaginas:
     def __init__(self, page: ft.Page):
-        """
-        Inicializa o gerenciador do app.
-        :param page: Referência à pagina do flet (obrigatório para atualizar a UI)
-        
-        """
-        
         self.page = page
         self._pagina_inicial()
-        
-        
-
+       
     def _pagina_inicial(self):
         # ------------------------------------------------------------
         # Método 1: Página Inicial (Tutorial + Botão criar formulário)
         # ------------------------------------------------------------
-
         cabecalho = ft.ListTile(
             title=ft.Text(value="Controle Financeiro", weight=ft.FontWeight.BOLD, size=20, color=paleta["azul_claro"]),
             subtitle=ft.Text(value="Ajuda Organizar as despesas pessoais", weight=ft.FontWeight.NORMAL, size=10, color=paleta["azul_claro"]),
             leading=ft.Image(src="periquito.png", fit=ft.ImageFit.CONTAIN, height=100, border_radius=100)
         )
         
-
         comp_saldo = ft.Container(
             content=ft.Column(
                 controls=[
@@ -90,7 +80,6 @@ class GerenciadorPaginas:
             ],
             alignment=ft.MainAxisAlignment.SPACE_AROUND,
         ))
-
 
         # instância do display
         displayrs = Display(page=self.page)

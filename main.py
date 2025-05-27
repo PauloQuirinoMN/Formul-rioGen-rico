@@ -3,10 +3,10 @@ from interface.paginas import GerenciadorPaginas
 
 
 paleta = {
-    "azul_escuro": "#000020",
+    "azul_escuro": "#000220",
     "azul_medio": "#171a4a",
     "azul_claro": "#2f2c79",
-    "laranja_forte": "#ff9800",
+    "laranja_forte": "#ff1e00",
     "laranja_fraco": "#ffcc50",
 }
 
@@ -23,8 +23,6 @@ def main(page: ft.Page):
     # O gerenciador de páginas recebe 
     # a página e a instância do bando de dados
     GerenciadorPaginas(page) 
-
-
 
 
 ft.app(target=main, assets_dir='assets')
